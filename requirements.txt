@@ -1,0 +1,10 @@
+The package requirements for this Python program are:
+- requests
+- BeautifulSoup
+
+You can install these packages using pip:
+
+```
+pip install requests
+pip install beautifulsoup4
+```
