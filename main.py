@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
+
 class JobOpportunityFinder:
     def __init__(self):
         self.base_url = "https://example.com/jobs"
@@ -22,9 +23,11 @@ class JobOpportunityFinder:
         for listing in listings:
             title = listing.find('h2', class_='job-title').text.strip()
             company = listing.find('div', class_='company-name').text.strip()
-            description = listing.find('div', class_='job-description').text.strip()
+            description = listing.find(
+                'div', class_='job-description').text.strip()
 
-            job_listings.append({'title': title, 'company': company, 'description': description})
+            job_listings.append(
+                {'title': title, 'company': company, 'description': description})
 
         return job_listings
 
@@ -67,25 +70,30 @@ class JobOpportunityFinder:
 
     def main(self) -> None:
         print("Welcome to the Web-Based Job Opportunity Finder!\n")
-        keyword = input("Please enter a keyword to search for job opportunities: ")
+        keyword = input(
+            "Please enter a keyword to search for job opportunities: ")
         job_listings = self.fetch_job_listings()
         filtered_listings = self.filter_job_listings(job_listings, keyword)
 
         if filtered_listings:
             self.save_job_opportunities(filtered_listings)
-            print(f"\n{len(filtered_listings)} job opportunities found and saved in 'job_opportunities.txt'.")
-            choice = input("Do you want to fetch additional information about the companies? (yes/no): ")
+            print(
+                f"\n{len(filtered_listings)} job opportunities found and saved in 'job_opportunities.txt'.")
+            choice = input(
+                "Do you want to fetch additional information about the companies? (yes/no): ")
 
             if choice.lower() == 'yes':
                 for listing in filtered_listings:
                     company_info = self.fetch_company_info(listing['company'])
-                    print(f"\nAdditional Information about {listing['company']}:\n")
+                    print(
+                        f"\nAdditional Information about {listing['company']}:\n")
                     print(f"Location: {company_info['location']}")
                     print(f"Website: {company_info['website']}")
                     print(f"Size: {company_info['size']}")
                     print(f"Industry: {company_info['industry']}")
         else:
             print("No job opportunities found for the given keyword.")
+
 
 if __name__ == "__main__":
     finder = JobOpportunityFinder()
