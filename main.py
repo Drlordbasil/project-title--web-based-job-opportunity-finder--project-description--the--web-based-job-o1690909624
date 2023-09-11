@@ -36,12 +36,8 @@ class JobOpportunityFinder:
         Filters job listings based on a given keyword.
         Takes a list of job listings and returns only the listings that contain the keyword in the title or description.
         """
-        filtered_listings = []
-
-        for listing in job_listings:
-            if keyword.lower() in listing['title'].lower() or keyword.lower() in listing['description'].lower():
-                filtered_listings.append(listing)
-
+        filtered_listings = [listing for listing in job_listings if keyword.lower(
+        ) in listing['title'].lower() or keyword.lower() in listing['description'].lower()]
         return filtered_listings
 
     def fetch_company_info(self, company_name: str) -> dict:
